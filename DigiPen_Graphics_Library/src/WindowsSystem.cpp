@@ -216,6 +216,14 @@ void WindowsSystem::SetWindowSize(int windowWidth, int windowHeight) const
 }
 
 //*************************************************************************************************
+void WindowsSystem::SetWindowMinSize(int windowWidth, int windowHeight)
+{
+    // Sets the min size
+    mWindowMinSize.x = (float)windowWidth;
+    mWindowMinSize.y = (float)windowHeight;
+} //Vi~
+
+//*************************************************************************************************
 void WindowsSystem::SetWindowStyle(unsigned style) const
 {
     // Sets the window style.
@@ -224,14 +232,6 @@ void WindowsSystem::SetWindowStyle(unsigned style) const
     // Resets the window.
     ShowWindow(mWindowHandle, SW_SHOWNORMAL);
 }
-
-//*************************************************************************************************
-void WindowsSystem::SetWindowMinSize(int windowWidth, int windowHeight)
-{
-    // Sets the min size
-    mWindowMinSize.x = (float)windowWidth;
-    mWindowMinSize.y = (float)windowHeight;
-} //Vi~
 
 //*************************************************************************************************
 BOOL WindowsSystem::HandleWindowsMessage(UINT message, WPARAM wParam, LPARAM lParam, int* result)
@@ -298,11 +298,10 @@ BOOL WindowsSystem::HandleWindowsMessage(UINT message, WPARAM wParam, LPARAM lPa
         return FALSE;
         break;
     case WM_GETMINMAXINFO:
+        // Reply with the minimum window size
         MINMAXINFO* minmax = (MINMAXINFO*)lParam;
         minmax->ptMinTrackSize.x = (long)(GetWindowTitlebarSize().x + mWindowMinSize.x);
         minmax->ptMinTrackSize.y = (long)(GetWindowTitlebarSize().y + mWindowMinSize.y);
-        //minmax->ptMaxTrackSize.x = 600;
-        //minmax->ptMaxTrackSize.y = 600;
         break;
     }
 

@@ -46,7 +46,7 @@ public:
     // Returns the size of the window
     DGL_Vec2 GetWindowSize() const;
 
-    // Returns the size of the titlebar
+    // Returns the size of the title bar
     DGL_Vec2 GetWindowTitlebarSize() const;
 
     // Sets the window size and the position of the top left corner
