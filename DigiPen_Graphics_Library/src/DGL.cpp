@@ -24,8 +24,6 @@ DGL::ErrorHandler error;
 //*************************************************************************************************
 HWND DGL_System_Init(const DGL_SysInitInfo* sysInitInfo)
 {
-    DGL::ErrorHandler().SetError("HOW DO I SEE IF MY CODE IS BEING RUN AAAAAA");
-
     // Initialize the window and save the window handle
     HWND handle = winSys.Initialize(sysInitInfo);
     // Check for an error
