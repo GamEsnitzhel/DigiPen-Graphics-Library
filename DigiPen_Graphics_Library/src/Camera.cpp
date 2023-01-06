@@ -8,8 +8,6 @@
 
 #include "Camera.h"
 #include "GraphicsSystem.h"
-#include "WindowsSystem.h"
-#include "Error.h"
 
 namespace DGL
 {
