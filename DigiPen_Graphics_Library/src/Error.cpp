@@ -40,8 +40,8 @@ void ErrorHandler::SetError(string_view text, long hr)
 void ErrorHandler::SetError(string_view text)
 {
     mLastError = text;
-#ifdef _DEBUG
     std::cerr << "DGL Error: " << mLastError << std::endl;
+#ifdef _DEBUG
 #endif
 }
 

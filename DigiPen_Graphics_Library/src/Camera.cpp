@@ -8,6 +8,7 @@
 
 #include "Camera.h"
 #include "GraphicsSystem.h"
+#include "WindowsSystem.h"
 
 namespace DGL
 {
@@ -76,6 +77,11 @@ void CameraObject::ResetWindowSize()
 
     // Save the window size
     mWindowSize = { (float)(rect.right - rect.left), (float)(rect.bottom - rect.top) };
+
+    // Check for 0 y height
+    if (mWindowSize.y < 1)
+        WindowsSystem().SetWindowSize((int)mWindowSize.x, 1);
+
     // Tell the graphics system to reset for the new window size
     gGraphics->D3D.ResetOnSizeChange();
 }
