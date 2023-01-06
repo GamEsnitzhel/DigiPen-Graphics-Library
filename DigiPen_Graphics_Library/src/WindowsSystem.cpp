@@ -272,6 +272,11 @@ BOOL WindowsSystem::HandleWindowsMessage(UINT message, WPARAM wParam, LPARAM lPa
             gGraphics->Camera.ResetWindowSize();
         mResizing = false;
         break;
+    case WM_GETMINMAXINFO:
+        // Reply with the minimum window size
+        ((MINMAXINFO*)lParam)->ptMinTrackSize.x = (long)(GetWindowTitlebarSize().x + mWindowMinSize.x);
+        ((MINMAXINFO*)lParam)->ptMinTrackSize.y = (long)(GetWindowTitlebarSize().y + mWindowMinSize.y);
+        break;
     case WM_KEYDOWN:
         // Set the key state to down
         gInput->SetKeyState((char)wParam, true);
@@ -296,12 +301,6 @@ BOOL WindowsSystem::HandleWindowsMessage(UINT message, WPARAM wParam, LPARAM lPa
         break;
     default:
         return FALSE;
-        break;
-    case WM_GETMINMAXINFO:
-        // Reply with the minimum window size
-        MINMAXINFO* minmax = (MINMAXINFO*)lParam;
-        minmax->ptMinTrackSize.x = (long)(GetWindowTitlebarSize().x + mWindowMinSize.x);
-        minmax->ptMinTrackSize.y = (long)(GetWindowTitlebarSize().y + mWindowMinSize.y);
         break;
     }
 

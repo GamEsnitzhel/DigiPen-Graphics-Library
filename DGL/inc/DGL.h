@@ -377,11 +377,11 @@ DGL_API void DGL_Window_SetSizeAndPosition(int windowWidth, int windowHeight, in
 // Changes the width and height of the application window, leaving it in the same position.
 DGL_API void DGL_Window_SetSize(int windowWidth, int windowHeight);
 
+// Changes the minimum width and height of the application window.
+DGL_API void DGL_Window_SetMinSize(int windowWidth, int windowHeight);
+
 // Changes the style of the current window. This can be used to switch between fullscreen and windowed modes.
 DGL_API void DGL_Window_SetStyle(unsigned style);
-
-// Changes the minimum size of the window.
-DGL_API void DGL_Window_SetMinSize(int windowWidth, int windowHeight);
 
 
 #ifdef __cplusplus
