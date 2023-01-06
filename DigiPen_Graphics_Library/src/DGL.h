@@ -367,6 +367,9 @@ DGL_API DGL_Vec2 DGL_Window_GetMonitorSize(void);
 // Returns the size of the client area of the window (not including title bar or borders).
 DGL_API DGL_Vec2 DGL_Window_GetSize(void);
 
+// Gets the size of the window's title bar
+DGL_API DGL_Vec2 DGL_Window_GetTitlebarSize(void);
+
 // Changes the width, height, and position of the application window.
 DGL_API void DGL_Window_SetSizeAndPosition(int windowWidth, int windowHeight, int windowLeftPos, 
     int windowTopPos);
@@ -377,7 +380,8 @@ DGL_API void DGL_Window_SetSize(int windowWidth, int windowHeight);
 // Changes the style of the current window. This can be used to switch between fullscreen and windowed modes.
 DGL_API void DGL_Window_SetStyle(unsigned style);
 
-
+// Changes the minimum size of the window.
+DGL_API void DGL_Window_SetMinSize(int windowWidth, int windowHeight);
 
 
 #ifdef __cplusplus

@@ -46,12 +46,18 @@ public:
     // Returns the size of the window
     DGL_Vec2 GetWindowSize() const;
 
+    // Returns the size of the titlebar
+    DGL_Vec2 GetWindowTitlebarSize() const;
+
     // Sets the window size and the position of the top left corner
     void SetWindowSizeAndPosition(int windowWidth, int windowHeight, int windowLeftPos, 
         int windowTopPos) const;
 
     // Sets the window size, keeping it at its current position
     void SetWindowSize(int windowWidth, int windowHeight) const;
+
+    // Sets the window's minimum size
+    void SetWindowMinSize(int windowWidth, int windowHeight);
 
     // Sets the style on the current window
     void SetWindowStyle(unsigned style) const;
@@ -68,6 +74,8 @@ private:
     HINSTANCE mInstance{ nullptr };
     // Keeps track of whether the window is currently being resized
     bool mResizing{ false };
+    // Minimum screen size
+    DGL_Vec2 mWindowMinSize{ 1, 1 };
 };
 
 // Global variable for accessing this system

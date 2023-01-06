@@ -169,6 +169,23 @@ DGL_Vec2 WindowsSystem::GetWindowSize() const
 }
 
 //*************************************************************************************************
+DGL_Vec2 WindowsSystem::GetWindowTitlebarSize() const
+{
+    // Get the window size and the title bar size
+    RECT windowRect;
+    GetClientRect(mWindowHandle, &windowRect);
+    RECT titleRect;
+    GetWindowRect(mWindowHandle, &titleRect);
+
+    // Get the width and height of the title bar based on the edges
+    DGL_Vec2 size;
+    size.x = (float)(titleRect.right - titleRect.left) - (windowRect.right - windowRect.left);
+    size.y = (float)(titleRect.bottom - titleRect.top) - (windowRect.bottom - windowRect.top);
+
+    return size;
+} //Vi~
+
+//*************************************************************************************************
 void WindowsSystem::SetWindowSizeAndPosition(int windowWidth, int windowHeight, int windowLeftPos, 
     int windowTopPos) const
 {
@@ -207,6 +224,14 @@ void WindowsSystem::SetWindowStyle(unsigned style) const
     // Resets the window.
     ShowWindow(mWindowHandle, SW_SHOWNORMAL);
 }
+
+//*************************************************************************************************
+void WindowsSystem::SetWindowMinSize(int windowWidth, int windowHeight)
+{
+    // Sets the min size
+    mWindowMinSize.x = (float)windowWidth;
+    mWindowMinSize.y = (float)windowHeight;
+} //Vi~
 
 //*************************************************************************************************
 BOOL WindowsSystem::HandleWindowsMessage(UINT message, WPARAM wParam, LPARAM lParam, int* result)
@@ -274,8 +299,8 @@ BOOL WindowsSystem::HandleWindowsMessage(UINT message, WPARAM wParam, LPARAM lPa
         break;
     case WM_GETMINMAXINFO:
         MINMAXINFO* minmax = (MINMAXINFO*)lParam;
-        //minmax->ptMinTrackSize.x = 500;
-        minmax->ptMinTrackSize.y = 10;
+        minmax->ptMinTrackSize.x = (long)(GetWindowTitlebarSize().x + mWindowMinSize.x);
+        minmax->ptMinTrackSize.y = (long)(GetWindowTitlebarSize().y + mWindowMinSize.y);
         //minmax->ptMaxTrackSize.x = 600;
         //minmax->ptMaxTrackSize.y = 600;
         break;
@@ -307,6 +332,12 @@ DGL_Vec2 DGL_Window_GetSize(void)
 }
 
 //*************************************************************************************************
+DGL_Vec2 DGL_Window_GetTitlebarSize(void)
+{
+    return gWinSys->GetWindowTitlebarSize();
+}
+
+//*************************************************************************************************
 void DGL_Window_SetSizeAndPosition(int windowWidth, int windowHeight, int windowLeftPos, int windowTopPos)
 {
     gWinSys->SetWindowSizeAndPosition(windowWidth, windowHeight, windowLeftPos, windowTopPos);
@@ -322,4 +353,10 @@ void DGL_Window_SetSize(int windowWidth, int windowHeight)
 void DGL_Window_SetStyle(unsigned style)
 {
     gWinSys->SetWindowStyle(style);
+}
+
+//*************************************************************************************************
+void DGL_Window_SetMinSize(int windowWidth, int windowHeight)
+{
+    gWinSys->SetWindowMinSize(windowWidth, windowHeight);
 }
