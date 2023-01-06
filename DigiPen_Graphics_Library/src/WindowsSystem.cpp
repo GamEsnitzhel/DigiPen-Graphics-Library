@@ -272,6 +272,13 @@ BOOL WindowsSystem::HandleWindowsMessage(UINT message, WPARAM wParam, LPARAM lPa
     default:
         return FALSE;
         break;
+    case WM_GETMINMAXINFO:
+        MINMAXINFO* minmax = (MINMAXINFO*)lParam;
+        //minmax->ptMinTrackSize.x = 500;
+        minmax->ptMinTrackSize.y = 10;
+        //minmax->ptMaxTrackSize.x = 600;
+        //minmax->ptMaxTrackSize.y = 600;
+        break;
     }
 
     return TRUE;
