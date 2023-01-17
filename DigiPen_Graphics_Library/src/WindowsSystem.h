@@ -76,6 +76,8 @@ private:
     bool mResizing{ false };
     // Minimum screen size
     DGL_Vec2 mWindowMinSize{ 1, 1 };
+    // Maximum screen size
+    DGL_Vec2 mWindowMaxSize{ -1, -1 };
 };
 
 // Global variable for accessing this system

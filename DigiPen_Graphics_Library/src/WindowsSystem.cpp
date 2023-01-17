@@ -276,6 +276,10 @@ BOOL WindowsSystem::HandleWindowsMessage(UINT message, WPARAM wParam, LPARAM lPa
         // Reply with the minimum window size
         ((MINMAXINFO*)lParam)->ptMinTrackSize.x = (long)(GetWindowTitlebarSize().x + mWindowMinSize.x);
         ((MINMAXINFO*)lParam)->ptMinTrackSize.y = (long)(GetWindowTitlebarSize().y + mWindowMinSize.y);
+        if (mWindowMinSize.x < mWindowMaxSize.x && mWindowMinSize.y < mWindowMaxSize.y) {
+        ((MINMAXINFO*)lParam)->ptMaxTrackSize.x = (long)(GetWindowTitlebarSize().x + mWindowMaxSize.x);
+        ((MINMAXINFO*)lParam)->ptMaxTrackSize.y = (long)(GetWindowTitlebarSize().y + mWindowMaxSize.y);
+        }
         break;
     case WM_KEYDOWN:
         // Set the key state to down
