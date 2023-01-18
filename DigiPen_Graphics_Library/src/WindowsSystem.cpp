@@ -283,11 +283,11 @@ BOOL WindowsSystem::HandleWindowsMessage(UINT message, WPARAM wParam, LPARAM lPa
         break;
     case WM_KEYDOWN:
         // Set the key state to down
-        gInput->SetKeyState((char)wParam, true);
+        gInput->SetKeyState((unsigned char)wParam, true);
         break;
     case WM_KEYUP:
         // Set the key state to up
-        gInput->SetKeyState((char)wParam, false);
+        gInput->SetKeyState((unsigned char)wParam, false);
         break;
     case WM_SYSKEYDOWN:
         // Catch the F10 key
@@ -302,6 +302,30 @@ BOOL WindowsSystem::HandleWindowsMessage(UINT message, WPARAM wParam, LPARAM lPa
     case WM_MOUSEWHEEL:
         // Calculate the mouse scroll delta value
         gInput->SetMouseScrollDelta(GET_WHEEL_DELTA_WPARAM(wParam) / WHEEL_DELTA);
+        break;
+    case WM_LBUTTONDOWN:
+        // Check for the left mouse button being down
+        gInput->SetKeyState(VK_LBUTTON, true);
+        break;
+    case WM_LBUTTONUP:
+        // Check for the left mouse button being released
+        gInput->SetKeyState(VK_LBUTTON, false);
+        break;
+    case WM_RBUTTONDOWN:
+        // Check for the right mouse button being down
+        gInput->SetKeyState(VK_RBUTTON, true);
+        break;
+    case WM_RBUTTONUP:
+        // Check for the right mouse button being released
+        gInput->SetKeyState(VK_RBUTTON, false);
+        break;
+    case WM_MBUTTONDOWN:
+        // Check for the middle mouse button being down
+        gInput->SetKeyState(VK_MBUTTON, true);
+        break;
+    case WM_MBUTTONUP:
+        // Check for the middle mouse button being released
+        gInput->SetKeyState(VK_MBUTTON, false);
         break;
     default:
         return FALSE;
