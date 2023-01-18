@@ -384,6 +384,8 @@ DGL_API void DGL_Window_SetMinSize(int windowWidth, int windowHeight);
 DGL_API void DGL_Window_SetStyle(unsigned style);
 
 
+
+
 #ifdef __cplusplus
 }
 #endif
